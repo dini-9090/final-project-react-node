@@ -17,15 +17,16 @@ export default function Favourites() {
 
     const dispath = useDispatch()
     const { data: products, isLoading, isError, error, isSuccess: productsSuccess } = useGetProductsQuery()
+    const [deleteFunc, { isSuccess, data }] = useDeleteFavouriteMutation()
+
     useEffect(()=>{
         if(productsSuccess){
             let arr = favourites?.map((f) => { return (products?.find(p => p._id == f)) })
             setFull_favourites(arr)
-          
         }
-    })
+    } ,[productsSuccess, favourites])
+    
 
-    const [deleteFunc, { isSuccess, data }] = useDeleteFavouriteMutation()
     const handleRemoveClick = (productId) => {
         deleteFunc({ _id: _id, id: productId })
     }

@@ -23,11 +23,11 @@ export default function NavBarNew() {
             icon: 'pi pi-search',
             url: '/products'
         },
-       
         {
             label: <Button label='מועדפים' style={{color: 'white'}} rounded text severity='info' onClick={()=>setVisibleRight(true)}></Button>,
             icon: 'pi pi-heart',
         },
+       
         {
             label: `שלום ישראל`,
             icon: 'pi pi-user',
@@ -36,17 +36,7 @@ export default function NavBarNew() {
                     label: 'התחברות',
                     icon: 'pi pi-bolt',
                     url: '/login'
-                },
-                {
-                    label: <Button style={{color: 'white'}} rounded text severity="info" onClick={()=>dispatch(removeToken())}>התנתקות</Button>,
-                    icon: 'pi pi-bolt',
-                    url: '/'
-                },
-                {
-                    label: 'עריכת פרטים אישיים',
-                    icon: 'pi pi-user-edit ', 
-                    url: '/update'                 
-                },                
+                },               
                 {
                     separator: true
                 },

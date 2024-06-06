@@ -15,7 +15,7 @@ const favouriteApiSlice = apiSlice.injectEndpoints({
                 method: "DELETE",
                 body: favouriteData
             }),
-            invalidatesTags: ["favourites"]
+            invalidatesTags:["Product"]
         }),
 
     }),

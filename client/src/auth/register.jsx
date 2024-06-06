@@ -7,6 +7,8 @@ import { Toast } from 'primereact/toast';
 import { AutoComplete } from "primereact/autocomplete";
 import { useRegisterMutation } from "./authApiSlice";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+
 
 export default function Register() {
     const [registerFunc,{isError,isSuccess,isLoading,data,error}]=useRegisterMutation()
@@ -20,7 +22,15 @@ export default function Register() {
     const show = () => {
         toast.current.show({ severity: 'success', summary: 'Form Submitted' });
     };
-
+    useEffect(() => {
+        if (isError) {
+          Swal.fire({
+            icon: 'error',
+            title: '...אופס',
+            text: 'משהו השתבש',
+          });
+        }
+      }, [isError]);
     const formik = useFormik({
         initialValues: {
             password: '',
@@ -52,7 +62,6 @@ export default function Register() {
             return errors;
         },
         onSubmit: (data) => {
-            data && show();
             formik.resetForm();
             registerFunc(data);
         }
@@ -70,7 +79,6 @@ export default function Register() {
         <div style={{ marginTop: '200px' }}>
         <form onSubmit={formik.handleSubmit} className="flex flex-wrap  gap-3 p-fluid" style={{ width: '50%', marginLeft: '25%' }}>
         <Toast ref={toast} />
-        <h2>{isError && JSON.stringify(error)}</h2>
         <div className="flex-auto">
         <label htmlFor="value" className="font-bold block mb-2">שם</label>
         <AutoComplete
